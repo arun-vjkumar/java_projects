@@ -9,11 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 @Service
 public class DisruptorHandler {
     private static RingBuffer<Event<String>> ringBuffer;

@@ -1,3 +1,5 @@
 config:
   disruptor:
-    max-concurrency: 128
+    ring-buffer-size: 128
+    consumer-size: 10
+    producer-size: 5

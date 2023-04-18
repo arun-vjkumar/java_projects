@@ -16,7 +16,9 @@ import java.util.concurrent.ThreadFactory;
 @ConfigurationProperties(prefix = "config.disruptor.*")
 @Configuration
 public class DisruptorConfig {
-    private int maxConcurrency;
+    private int ringBufferSize;
+    private int consumerSize;
+    private int producerSize;
 
     public RingBuffer<Event<String>> createDisruptor(EventHandler<Event<String>>... handler) {
         ThreadFactory threadFactory = DaemonThreadFactory.INSTANCE;
@@ -24,9 +26,9 @@ public class DisruptorConfig {
 
         Disruptor<Event<String>> disruptor = new Disruptor<>(
                 Event::new,
-                maxConcurrency,
+                ringBufferSize,
                 threadFactory,
-                ProducerType.SINGLE,
+                ProducerType.MULTI,
                 waitStrategy
         );
 
@@ -36,11 +38,27 @@ public class DisruptorConfig {
         return disruptor.start();
     }
 
-    public int getMaxConcurrency() {
-        return maxConcurrency;
+    public int getRingBufferSize() {
+        return ringBufferSize;
     }
 
-    public void setMaxConcurrency(int maxConcurrency) {
-        this.maxConcurrency = maxConcurrency;
+    public void setRingBufferSize(int ringBufferSize) {
+        this.ringBufferSize = ringBufferSize;
+    }
+
+    public int getConsumerSize() {
+        return consumerSize;
+    }
+
+    public void setConsumerSize(int consumerSize) {
+        this.consumerSize = consumerSize;
+    }
+
+    public int getProducerSize() {
+        return producerSize;
+    }
+
+    public void setProducerSize(int producerSize) {
+        this.producerSize = producerSize;
     }
 }

@@ -1,0 +1,3 @@
+config:
+  disruptor:
+    max-concurrency: 128

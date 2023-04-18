@@ -14,7 +14,7 @@ public class EventConsumer {
         return IntStream.range(1, 6).mapToObj(i -> {
             return (EventHandler<Event<String>>) (event, sequence, endOfBatch) -> {
                 if (sequence % 5 == i) {
-                    System.out.println(String.format("Consumer %d: Payload: %s", i, event.getPayload()));
+                    System.out.println(String.format("Thread: %s Consumer %d: Payload: %s", Thread.currentThread().getName(), i, event.getPayload()));
                 }
             };
         }).collect(Collectors.toList());
